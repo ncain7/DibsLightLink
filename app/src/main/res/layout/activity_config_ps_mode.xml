@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/light_color"
+        android:id="@+id/textView_color_set"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="50dp"
+        android:textSize="40sp"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/timer"
+        android:id="@+id/textView_timer"
+        android:layout_below="@+id/textView_color_set"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="50dp"
+        android:textSize="40sp"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/end_time"
+        android:id="@+id/textView_end_time"
+        android:layout_below="@+id/textView_timer"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="50dp"
+        android:textSize="40sp"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/default_prompt"
+        android:id="@+id/textView20"
+        android:layout_below="@+id/textView_end_time"
+        android:layout_marginTop="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:textSize="40sp"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/color_view"
+        android:layout_toEndOf="@+id/textView_end_time"
+        android:layout_toRightOf="@+id/textView_end_time"
+        android:gravity="center"
+        android:layout_alignTop="@+id/textView_color_set"
+        android:layout_above="@+id/textView_timer"
+        android:layout_alignStart="@+id/editText"
+        android:layout_alignLeft="@+id/editText"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="@color/colorAccent"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="8"
+        android:id="@+id/editText"
+        android:layout_alignTop="@+id/textView_timer"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:hint="@string/time_in_minutes"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="8"
+        android:id="@+id/editText2"
+        android:layout_alignTop="@+id/textView_end_time"
+        android:layout_alignStart="@+id/editText"
+        android:layout_alignLeft="@+id/editText"
+        android:gravity="center"
+        android:hint="HH:MM am/pm"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_modes"
+        android:layout_alignTop="@+id/textView20"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@+id/textView20"
+        android:layout_alignStart="@+id/editText2"
+        android:layout_alignLeft="@+id/editText2" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/update"
+        android:id="@+id/button3"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/textView_color_set"
+        android:layout_alignRight="@+id/textView_color_set"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:id="@+id/button4"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/spinner_modes"
+        android:layout_alignLeft="@+id/spinner_modes"
+        android:textColor="@color/colorPrimaryDark" />
+
+</RelativeLayout>

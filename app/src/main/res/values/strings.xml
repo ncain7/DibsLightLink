@@ -1,0 +1,64 @@
+<resources>
+    <string name="app_name">DibsLightLinks</string>
+    <string name="bt_connected">Connected to bluetooth</string>
+    <string name="bt_unavailable">Bluetooth not supported on this device</string>
+    <string name="bt_device_found">Device HC-05 found</string>
+    <string name="bt_no_device_found">No devices found</string>
+    <string name="all_devices">All Devices Found In Range</string>
+    <string name="select_device">Select a device to connect to</string>
+    <string name="send">Send Message</string>
+    <string name="not_connected">Not connected to another device</string>
+
+    <string name="update_color">Update Color</string>
+    <string name="hexErr">Hex Code has wrong format</string>
+    <string name="change_color">Change Color</string>
+    <string name="hex_color">Hex Color</string>
+    <string name="make_connection">Connect to Dibs</string>
+    <string name="configure_modes">Configure Modes</string>
+    <string name="select_mode">Select a Mode to Configure</string>
+
+
+    <!-- ModeClass Names for Textview-->
+    <string name="tv_party_mode">Party Mode</string>
+    <string name="tv_crowd_mode">Crowd Mode</string>
+    <string name="tv_sleep_mode">Sleep Mode</string>
+    <string name="ps_standard_pathway_mode">Power Save Pathway Mode</string>
+    <string name="standard_pathway_mode">Standard Pathway Mode</string>
+    <string name="tv_security_mode">Security Mode</string>
+
+
+    <string name="update">Update</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="default_prompt">Default</string>
+    <string name="light_color">Light Color</string>
+    <string name="timer">Timer</string>
+    <string name="end_time">End Time</string>
+    <string name="colorset">Color Set</string>
+    <string name="pattern">Pattern</string>
+    <string name="time_in_minutes">Enter time in minutes</string>
+
+    <!-- Spinner arrays -->
+    <string-array name="colorset_array">
+        <item>Cold</item>
+        <item>Warm</item>
+        <item>Custom</item>
+    </string-array>
+
+    <string-array name="modes_array">
+        <item>Standard Pathway Mode</item>
+        <item>Power Save Pathway Mode</item>
+        <item>Party Mode</item>
+        <item>Day Time Security Mode</item>
+        <item>Night Time Security Mode</item>
+        <item>Sleep Mode</item>
+    </string-array>
+
+    <string-array name="patterns_array">
+        <item>Fading</item>
+        <item>Moving</item>
+        <item>Flashing</item>
+        <item>Random</item>
+    </string-array>
+
+</resources>

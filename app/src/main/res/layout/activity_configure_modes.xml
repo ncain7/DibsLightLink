@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/select_mode"
+        android:id="@+id/textView_select_mode"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:gravity="center"/>
+
+    <ImageButton
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/imageButton_standard_mode"
+        android:layout_below="@+id/textView_select_mode"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@mipmap/ic_standard"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"/>
+
+    <ImageButton
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/imageButton_powerSave_mode"
+        android:layout_below="@+id/textView_select_mode"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:src="@mipmap/ic_powersave"
+        android:layout_marginRight="30dp"
+        android:layout_marginEnd="30dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/standard_pathway_mode"
+        android:id="@+id/textView_standard_mode"
+        android:layout_alignRight="@+id/imageButton_standard_mode"
+        android:layout_alignEnd="@+id/imageButton_standard_mode"
+        android:layout_below="@+id/imageButton_standard_mode"
+        android:layout_alignLeft="@+id/imageButton_standard_mode"
+        android:layout_alignStart="@+id/imageButton_standard_mode"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/ps_standard_pathway_mode"
+        android:id="@+id/textView_powerSave_mode"
+        android:layout_alignTop="@+id/textView_standard_mode"
+        android:layout_alignLeft="@+id/imageButton_powerSave_mode"
+        android:layout_alignStart="@+id/imageButton_powerSave_mode"
+        android:layout_alignBottom="@+id/textView_standard_mode"
+        android:layout_alignRight="@+id/imageButton_powerSave_mode"
+        android:layout_alignEnd="@+id/imageButton_powerSave_mode"
+        android:gravity="center"/>
+
+    <ImageButton
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/imageButton_party_mode"
+        android:layout_below="@+id/textView_standard_mode"
+        android:layout_alignLeft="@+id/textView_standard_mode"
+        android:layout_alignStart="@+id/textView_standard_mode"
+        android:src="@mipmap/ic_party"/>
+
+    <ImageButton
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/imageButton_crowd_mode"
+        android:layout_below="@+id/textView_powerSave_mode"
+        android:layout_alignRight="@+id/textView_powerSave_mode"
+        android:layout_alignEnd="@+id/textView_powerSave_mode"
+        android:src="@mipmap/ic_crowd"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/tv_party_mode"
+        android:id="@+id/textView_party_mode"
+        android:layout_below="@+id/imageButton_party_mode"
+        android:layout_alignLeft="@+id/imageButton_party_mode"
+        android:layout_alignStart="@+id/imageButton_party_mode"
+        android:layout_alignRight="@+id/imageButton_party_mode"
+        android:layout_alignEnd="@+id/imageButton_party_mode"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/tv_crowd_mode"
+        android:id="@+id/textView_crowd_mode"
+        android:layout_below="@+id/imageButton_crowd_mode"
+        android:layout_alignLeft="@+id/imageButton_crowd_mode"
+        android:layout_alignStart="@+id/imageButton_crowd_mode"
+        android:layout_alignBottom="@+id/textView_party_mode"
+        android:layout_alignRight="@+id/imageButton_crowd_mode"
+        android:layout_alignEnd="@+id/imageButton_crowd_mode"
+        android:gravity="center"/>
+
+    <ImageButton
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/imageButton_sleep_mode"
+        android:layout_below="@+id/textView_party_mode"
+        android:layout_alignLeft="@+id/textView_party_mode"
+        android:layout_alignStart="@+id/textView_party_mode"
+        android:src="@mipmap/ic_sleep"/>
+
+    <ImageButton
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/imageButton_security_mode"
+        android:layout_below="@+id/textView_crowd_mode"
+        android:layout_alignRight="@+id/textView_crowd_mode"
+        android:layout_alignEnd="@+id/textView_crowd_mode"
+        android:src="@mipmap/ic_security"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/tv_sleep_mode"
+        android:id="@+id/textView_sleep_mode"
+        android:layout_alignLeft="@+id/imageButton_sleep_mode"
+        android:layout_alignStart="@+id/imageButton_sleep_mode"
+        android:layout_below="@+id/imageButton_sleep_mode"
+        android:layout_alignRight="@+id/imageButton_sleep_mode"
+        android:layout_alignEnd="@+id/imageButton_sleep_mode"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/tv_security_mode"
+        android:id="@+id/textView_security_mode"
+        android:layout_alignBottom="@+id/textView_sleep_mode"
+        android:layout_alignRight="@+id/imageButton_security_mode"
+        android:layout_alignEnd="@+id/imageButton_security_mode"
+        android:layout_alignTop="@+id/textView_sleep_mode"
+        android:layout_alignLeft="@+id/imageButton_security_mode"
+        android:layout_alignStart="@+id/imageButton_security_mode"
+        android:gravity="center"/>
+
+
+</RelativeLayout>
