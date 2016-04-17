@@ -116,7 +116,10 @@ public class MainScreenActivity extends AppCompatActivity{
             //Set all the modes to default settings
             prefs.edit().putString("StandardModePref",getString(R.string.def_pathway_mode_cmnd)).apply();
             prefs.edit().putString("PSModePref",getString(R.string.def_ps_pathway_mode_cmd)).apply();
-            prefs.edit().putString("PartyModePref",getString(R.string.def_party_mode_cmd));
+            prefs.edit().putString("PartyModePref",getString(R.string.def_party_mode_cmd)).apply();
+            prefs.edit().putString("CrowdModePref",getString(R.string.def_crowd_mode_cmd)).apply();
+            prefs.edit().putString("SleepModePref",getString(R.string.def_sleep_mode_cmd)).apply();
+            prefs.edit().putString("SecurityModePref",getString(R.string.def_security_mode_cmd)).apply();
         }
 
 
@@ -270,8 +273,6 @@ public class MainScreenActivity extends AppCompatActivity{
         Log.d(TAG, "connectDevice: Connect to the device...");
 
 
-        //textView.setText(device.getAddress());
-
     }
 
 
@@ -282,7 +283,7 @@ public class MainScreenActivity extends AppCompatActivity{
         standardPathwayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String message = getString(R.string.def_pathway_mode_cmnd);
+                String message = prefs.getString("StandardModePref", getString(R.string.def_pathway_mode_cmnd));
                 sendMessage(message);
             }
         });
@@ -290,7 +291,39 @@ public class MainScreenActivity extends AppCompatActivity{
         powerSavePathwayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String message = prefs.getString("PSModePref", getString(R.string.def_ps_pathway_mode_cmd));
+                sendMessage(message);
+            }
+        });
 
+        partyModeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String message = prefs.getString("PartyModePref",getString(R.string.def_party_mode_cmd));
+                sendMessage(message);
+            }
+        });
+
+        crowdModeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String message = prefs.getString("CrowdModePref",getString(R.string.def_crowd_mode_cmd));
+                sendMessage(message);
+            }
+        });
+
+        sleepModeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String message = prefs.getString("SleepModePref",getString(R.string.def_sleep_mode_cmd));
+                sendMessage(message);
+            }
+        });
+
+        securityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String message = prefs.getString("SecurityModePref",getString(R.string.def_security_mode_cmd));
             }
         });
 
