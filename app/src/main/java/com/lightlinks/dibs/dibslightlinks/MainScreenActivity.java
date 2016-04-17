@@ -114,8 +114,8 @@ public class MainScreenActivity extends AppCompatActivity{
             //Update to not being the first run
             prefs.edit().putBoolean("isFirstRun",false).apply();
             //Set all the modes to default settings
-            prefs.edit().putString("StandardModePref",getString(R.string.default_pathway_mode_cmnd)).apply();
-            prefs.edit().putString("PSModePref",getString(R.string.ps_pathway_mode_cmd)).apply();
+            prefs.edit().putString("StandardModePref",getString(R.string.def_pathway_mode_cmnd)).apply();
+            prefs.edit().putString("PSModePref",getString(R.string.def_ps_pathway_mode_cmd)).apply();
             prefs.edit().putString("PartyModePref",getString(R.string.def_party_mode_cmd));
         }
 

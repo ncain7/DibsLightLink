@@ -259,7 +259,7 @@ public class MainActivity extends AppCompatActivity {
         standardPathwayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String message = getString(R.string.default_pathway_mode_cmnd);
+                String message = getString(R.string.def_pathway_mode_cmnd);
                 sendMessage(message);
             }
         });
