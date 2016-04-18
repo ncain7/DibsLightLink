@@ -16,18 +16,6 @@
         android:textSize="40sp"
         android:textColor="@color/colorPrimaryDark" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/timer"
-        android:id="@+id/textView_timer"
-        android:layout_below="@+id/textView_color_set"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="50dp"
-        android:textSize="40sp"
-        android:textColor="@color/colorPrimaryDark" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -35,7 +23,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/end_time"
         android:id="@+id/textView_end_time"
-        android:layout_below="@+id/textView_timer"
+        android:layout_below="@+id/textView_color_set"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="50dp"
@@ -59,42 +47,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/color_view"
-        android:layout_toEndOf="@+id/textView_end_time"
-        android:layout_toRightOf="@+id/textView_end_time"
+        android:layout_toEndOf="@+id/textView_color_set"
         android:gravity="center"
         android:layout_alignTop="@+id/textView_color_set"
-        android:layout_above="@+id/textView_timer"
-        android:layout_alignStart="@+id/editText"
-        android:layout_alignLeft="@+id/editText"
+        android:layout_above="@+id/textView_end_time"
         android:layout_marginRight="5dp"
         android:layout_marginEnd="5dp"
-        android:background="@color/colorAccent"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="time"
-        android:ems="8"
-        android:id="@+id/editText"
-        android:layout_alignTop="@+id/textView_timer"
+        android:background="@color/colorAccent"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:gravity="center"
-        android:hint="@string/time_in_minutes"
-        android:textColor="@color/colorPrimaryDark" />
+        android:layout_alignLeft="@+id/editText_end_time"
+        android:layout_alignStart="@+id/editText_end_time" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="time"
-        android:ems="8"
-        android:id="@+id/editText2"
-        android:layout_alignTop="@+id/textView_end_time"
-        android:layout_alignStart="@+id/editText"
-        android:layout_alignLeft="@+id/editText"
+        android:ems="4"
+        android:id="@+id/editText_end_time"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentEnd="false"
+        android:layout_toLeftOf="@+id/switch1"
         android:gravity="center"
-        android:hint="HH:MM am/pm"
-        android:textColor="@color/colorPrimaryDark" />
+        android:hint="HH:MM"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_alignTop="@+id/textView_end_time" />
 
     <Spinner
         android:layout_width="wrap_content"
@@ -104,27 +81,37 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignBottom="@+id/textView20"
-        android:layout_alignStart="@+id/editText2"
-        android:layout_alignLeft="@+id/editText2" />
+        android:layout_alignStart="@+id/editText_end_time"
+        android:layout_alignLeft="@+id/editText_end_time" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/update"
-        android:id="@+id/button3"
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/textView_color_set"
+        android:id="@+id/Button_update"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_alignTop="@+id/Button_cancel"
         android:layout_alignRight="@+id/textView_color_set"
-        android:textColor="@color/colorPrimaryDark" />
+        android:layout_alignEnd="@+id/textView_color_set" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cancel"
-        android:id="@+id/button4"
+        android:id="@+id/Button_cancel"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/spinner_modes"
         android:layout_alignLeft="@+id/spinner_modes"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginBottom="25dp" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AM/PM"
+        android:id="@+id/switch1"
+        android:layout_alignBottom="@+id/editText_end_time"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

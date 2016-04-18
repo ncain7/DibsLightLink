@@ -1,12 +1,17 @@
 package com.lightlinks.dibs.dibslightlinks;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 /**
  * Created by NickHome on 4/15/16.
@@ -14,6 +19,10 @@ import android.widget.ImageButton;
 public class ConfigureModeActivity extends AppCompatActivity{
 
 
+    private int LEDred, LEDgreen, LEDblue;
+    ColorPicker cp; // = new ColorPicker(this,0,0,0);
+    SharedPreferences pref;// = PreferenceManager.getDefaultSharedPreferences(this);
+    Context mActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +32,9 @@ public class ConfigureModeActivity extends AppCompatActivity{
         //Setup toolbar
         Toolbar myToolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(myToolbar);
+        cp = new ColorPicker(this,0,0,0);
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        mActivity = this;
 
         //Setup buttons and their listeners
         ImageButton ib_standard_mode = (ImageButton) findViewById(R.id.imageButton_standard_mode);
@@ -84,10 +96,13 @@ public class ConfigureModeActivity extends AppCompatActivity{
     }
 
     private void configureSleepMode() {
-        
+        Intent config_sleep_intent = new Intent(this, ConfigSleepModeActivity.class);
+        startActivity(config_sleep_intent);
     }
 
     private void configureCrowdMode() {
+        Intent config_crowd_intent = new Intent(this,ConfigCrowdModeActivity.class);
+        startActivity(config_crowd_intent);
         
     }
 
@@ -103,8 +118,24 @@ public class ConfigureModeActivity extends AppCompatActivity{
 
     private void configureStandardMode() {
         //Create and intent to go to standard modes configure page
-        //Intent stnd_mode_config = new Intent(this, StandardConfigActivity.class);
-       // startActivity(stnd_mode_config);
+        //Intent stnd_mode_config = new Intent(this, ConfigStandActivity.class);
+        //startActivity(stnd_mode_config);
+        Toast.makeText(this,"You can only change color in Standard Mode",Toast.LENGTH_SHORT).show();
+
+        cp.show();
+        Button updateButton = (Button) cp.findViewById(R.id.button_update_color);
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LEDred = cp.getRed();
+                LEDgreen = cp.getGreen();
+                LEDblue = cp.getBlue();
+                String command = "LED "+LEDred+" "+LEDgreen+" "+LEDblue+" 5|PIR OFF|TIRS OFF|PAT ON|";
+                pref.edit().putString("StandardModePref",command).apply();
+                cp.dismiss();
+                Toast.makeText(mActivity,command,Toast.LENGTH_SHORT).show();
+            }
+        });
         
     }
 }

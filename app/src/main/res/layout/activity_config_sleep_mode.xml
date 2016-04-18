@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_color"
+        android:textSize="40sp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="40dp"
+        android:text="@string/end_time"
+        android:textColor="@color/colorPrimaryDark"
+        android:gravity="center" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/update"
+        android:id="@+id/Sleep_Button_update"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/stnd_space"
+        android:layout_toStartOf="@+id/stnd_space"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/colorPrimaryDark"/>
+    <Space
+        android:layout_width="20dp"
+        android:layout_height="10dp"
+        android:id="@+id/stnd_space"
+        android:layout_centerInParent="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:id="@+id/Sleep_Button_cancel"
+        android:layout_alignBottom="@+id/Sleep_Button_update"
+        android:layout_toRightOf="@+id/stnd_space"
+        android:layout_toEndOf="@+id/stnd_space"
+        android:textColor="@color/colorPrimaryDark"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="10"
+        android:id="@+id/editText_sleep_end_time"
+        android:layout_below="@+id/tv_color"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="58dp"
+        android:textColor="@color/colorPrimaryDark"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/time_prompt"
+        android:id="@+id/textView"
+        android:layout_below="@+id/stnd_space"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textColor="@color/colorPrimaryDark"/>
+
+</RelativeLayout>

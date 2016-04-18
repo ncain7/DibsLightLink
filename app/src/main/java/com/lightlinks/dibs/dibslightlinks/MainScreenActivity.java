@@ -122,9 +122,6 @@ public class MainScreenActivity extends AppCompatActivity{
             prefs.edit().putString("SecurityModePref",getString(R.string.def_security_mode_cmd)).apply();
         }
 
-
-        //outEditText = (EditText) findViewById(R.id.edit_text_out);
-
         cp = new ColorPicker(this, 0,0,0);
         mainToolBar = (Toolbar) findViewById(R.id.main_toolbar);
 

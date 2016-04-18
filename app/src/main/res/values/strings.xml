@@ -37,6 +37,8 @@
     <string name="colorset">Color Set</string>
     <string name="pattern">Pattern</string>
     <string name="time_in_minutes">Enter time in minutes</string>
+    <string name="time_prompt">If no time is specified, the mode will be active until manually changed by the user</string>
+    <string name="crowd_light_speed">Light Speed</string>
 
     <!-- Spinner arrays -->
     <string-array name="colorset_array">

@@ -35,7 +35,10 @@
         <activity android:name=".ConfigPowerSaveActivity"
             android:screenOrientation="portrait"
             android:parentActivityName=".ConfigureModeActivity"/>
-        <activity android:name=".ConfigStandActivity"
+        <activity android:name=".ConfigSleepModeActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".ConfigureModeActivity"/>
+        <activity android:name=".ConfigCrowdModeActivity"
             android:screenOrientation="portrait"
             android:parentActivityName=".ConfigureModeActivity"/>
 
