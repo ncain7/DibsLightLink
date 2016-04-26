@@ -8,7 +8,7 @@
     <application
         android:name=".ModeClass"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_dibs"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -39,6 +39,9 @@
             android:screenOrientation="portrait"
             android:parentActivityName=".ConfigureModeActivity"/>
         <activity android:name=".ConfigCrowdModeActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".ConfigureModeActivity"/>
+        <activity android:name=".ConfigSecurityActivity"
             android:screenOrientation="portrait"
             android:parentActivityName=".ConfigureModeActivity"/>
 

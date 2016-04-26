@@ -1,11 +1,11 @@
 <!-- <?xml version="1.0" encoding="utf-8"?> -->
 <resources>
     <!-- default modes of operation commands -->
-    <string name="def_pathway_mode_cmnd">LED 255 127 127 5|PIR OFF|TIRS ON|PAT ON|</string>
-    <string name="def_ps_pathway_mode_cmd">LED 255 127 127 5|PIR ON|TIRS OFF|PAT ALT 255 127 127 0 0 0 5|</string>
-    <string name="def_party_mode_cmd">COLORSET WARM|PIR OFF|TIRS OFF|TIME 2000|PAT FADE| DEF SLEEP|</string>
-    <string name="def_crowd_mode_cmd">LED 255 0 0 127 0 0 5|PIR OFF|TIRS ON|TIME 500|PAT ALT|</string>
-    <string name="def_sleep_mode_cmd">LED OFF|PIR OFF|TIRS OFF|PAT OFF|</string>
-    <string name="def_security_mode_cmd">LED 255 0 0 5|PIR ON|TIRS ON|PAT ALT|</string>
+    <string name="def_pathway_mode_cmnd">0 LED 255 127 127 5|</string>
+    <string name="def_ps_pathway_mode_cmd">2|</string>
+    <string name="def_party_mode_cmd">5 COLORSET WARM|PIR OFF|TIRS OFF|TIME 2000|PAT FADE| DEF SLEEP|</string>
+    <string name="def_crowd_mode_cmd">4 LED 255 0 0 127 0 0 5|PIR OFF|TIRS ON|TIME 500|PAT ALT|</string>
+    <string name="def_sleep_mode_cmd">1</string>
+    <string name="def_security_mode_cmd">3|</string>
 
 </resources>

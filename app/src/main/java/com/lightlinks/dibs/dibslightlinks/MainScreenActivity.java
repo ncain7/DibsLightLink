@@ -4,10 +4,7 @@ package com.lightlinks.dibs.dibslightlinks;
  * Created by NickHome on 4/14/16.
  */
 //import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Handler;
@@ -34,11 +31,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.UUID;
-
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -46,7 +38,9 @@ public class MainScreenActivity extends AppCompatActivity{
     /**
      * Variables used in MainActivity
      */
+    private static final String MYAPPPREFS = "DibsPrefs";
     private static final String TAG = "MainActivity";
+    private static final String TAG1 = "MESSAGE";
     private BluetoothSocket mSocket;
     private BluetoothAdapter mBluetoothAdapter;
     private BluetoothDevice mBluetoothDevice;
@@ -57,7 +51,6 @@ public class MainScreenActivity extends AppCompatActivity{
     private ArrayAdapter<String> messageArrayAdapter;
     private StringBuffer outgoingStringBuffer;
     private BluetoothChatService mChatService = null;
-    //private Button sendButton;
     private ImageButton standardPathwayButton;
     private ImageButton powerSavePathwayButton;
     private ImageButton partyModeButton;
@@ -69,8 +62,11 @@ public class MainScreenActivity extends AppCompatActivity{
     private int LED_red;
     private int LED_green;
     private int LED_blue;
+    private int RGBcolor;
+    private int cur_mode;
     private String pattern;
     private String mode_default;
+    int[] color; // Used for getting the color for the current mode
     private Color[] colors = new Color[4]; //Holds the color of the colorsets for party mode
 
     /**
@@ -86,6 +82,7 @@ public class MainScreenActivity extends AppCompatActivity{
     private InputStream inputStream;
     private OutputStream outputStream;
     AppCompatActivity mActivity;
+    //private ModeClass mode;
 
     SharedPreferences prefs;// = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     //ArrayAdapter<String> newDeviceArrayAdapter;
@@ -96,7 +93,7 @@ public class MainScreenActivity extends AppCompatActivity{
         //setContentView(R.layout.activity_main);
         setContentView(R.layout.activity_mainscreen);
 
-        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        prefs = getSharedPreferences(MYAPPPREFS,0);
         standardPathwayButton = (ImageButton) findViewById(R.id.imageButton_standard_mode);
         powerSavePathwayButton = (ImageButton) findViewById(R.id.imageButton_powerSave_mode);
         partyModeButton = (ImageButton) findViewById(R.id.imageButton_party_mode);
@@ -104,25 +101,36 @@ public class MainScreenActivity extends AppCompatActivity{
         sleepModeButton = (ImageButton) findViewById(R.id.imageButton_sleep_mode);
         securityButton = (ImageButton) findViewById(R.id.imageButton_security_mode);
 
+        //mode = new ModeClass();
 
         //Check if first time opening the application
         Boolean isFirstRun = prefs.getBoolean("isFirstRun",true);
 
         if (isFirstRun){
 
-            Toast.makeText(this,"Welcome to Dibs LightLinks System!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Welcome to Dibs LightLinks System!", Toast.LENGTH_SHORT).show();
+            cur_mode = 0; //Dibs system starts out in Standard mode on first run
             //Update to not being the first run
-            prefs.edit().putBoolean("isFirstRun",false).apply();
+            prefs.edit().putBoolean("isFirstRun", false).apply();
             //Set all the modes to default settings
             prefs.edit().putString("StandardModePref",getString(R.string.def_pathway_mode_cmnd)).apply();
             prefs.edit().putString("PSModePref",getString(R.string.def_ps_pathway_mode_cmd)).apply();
-            prefs.edit().putString("PartyModePref",getString(R.string.def_party_mode_cmd)).apply();
-            prefs.edit().putString("CrowdModePref",getString(R.string.def_crowd_mode_cmd)).apply();
-            prefs.edit().putString("SleepModePref",getString(R.string.def_sleep_mode_cmd)).apply();
-            prefs.edit().putString("SecurityModePref",getString(R.string.def_security_mode_cmd)).apply();
+            prefs.edit().putString("PartyModePref", getString(R.string.def_party_mode_cmd)).apply();
+            prefs.edit().putString("CrowdModePref", getString(R.string.def_crowd_mode_cmd)).apply();
+            prefs.edit().putString("SleepModePref", getString(R.string.def_sleep_mode_cmd)).apply();
+            prefs.edit().putString("SecurityModePref", getString(R.string.def_security_mode_cmd)).apply();
+            prefs.edit().putInt("StandardModeColorAPP", Color.rgb(255, 127, 127)).apply();
+            prefs.edit().putInt("PSModeColorAPP", Color.rgb(255, 127, 127)).apply();
+            prefs.edit().putString("PartyModeColorSet", "WARM").apply();
+            prefs.edit().putInt("CrowdModeColorAPP", Color.rgb(255, 0, 0)).apply();
+            prefs.edit().putInt("SecurityModeColorAPP", Color.rgb(255, 0, 0)).apply();
+            prefs.edit().putInt("StandardModeColorTrue", Color.rgb(255, 127, 127)).apply();
+            prefs.edit().putInt("PSModeColorTrue", Color.rgb(255, 127, 127)).apply();
+            prefs.edit().putInt("CrowdModeColorTrue", Color.rgb(255, 0, 0)).apply();
+            prefs.edit().putInt("SecurityModeColorTrue", Color.rgb(255, 0, 0)).apply();
         }
 
-        cp = new ColorPicker(this, 0,0,0);
+
         mainToolBar = (Toolbar) findViewById(R.id.main_toolbar);
 
         Log.d(TAG, "onCreate: About to try getting adapter");
@@ -148,57 +156,127 @@ public class MainScreenActivity extends AppCompatActivity{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        String message;
 
         switch (id){
             case R.id.change_color:
-                cp.show();
-                Button updateColor = (Button)  cp.findViewById(R.id.button_update_color);
-                if (updateColor!=null) {
-                    updateColor.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            LED_red = cp.getRed();
-                            LED_green = cp.getGreen();
-                            LED_blue = cp.getBlue();
-                            cp.dismiss();
-                            String message = "LED "+LED_red +" "+ LED_green+ " "+LED_blue+" 10|";
-                            sendMessage(message);
-                        }
-                    });
-                }else {
-                    Log.d(TAG, "onOptionsItemSelected: Got Null for update color");
+                cp = getColPreferences(cur_mode);
+                if (cp!=null) {
+                    cp.show();
+                    Button updateColor = (Button) cp.findViewById(R.id.button_update_color);
+                    if (updateColor != null) {
+                        updateColor.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                LED_red = cp.getRed();
+                                LED_green = cp.getTrueGreen();
+                                LED_blue = cp.getTrueBlue();
+                                cp.dismiss();
+                                Log.d(TAG, "onClick for colorPicker: red: " + LED_red + " green: " + LED_green + " blue: " + LED_blue);
+                                String message = "0 LED " + LED_red + " " + LED_green + " " + LED_blue + " 5|";
+                                Log.d(TAG, "COLORPICKER: "+message);
+                                updateColPrefs(cur_mode, cp.getRed(), cp.getGreen(), cp.getBlue());
+                                sendMessage(message);
+                            }
+                        });
+                    }
                 }
                 break;
             case R.id.make_connection:
                 if (!mBluetoothAdapter.isEnabled() ){
                     Intent enableBluetooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                     startActivityForResult(enableBluetooth, REQUEST_BLUETOOTH);
+                }else {
+                    //create new intent for listing devices
+                    Intent serverIntent = new Intent(this, DeviceListActivity.class);
+                    startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_SECURE);
                 }
-                //create new intent for listing devices
-                Intent serverIntent = new Intent(this, DeviceListActivity.class);
-                startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_SECURE);
                 break;
 
             case R.id.configure_mode:
                 //create an intent to start the configure activity
-                Intent configIntent = new Intent(this,ConfigureModeActivity.class);
+                Intent configIntent = new Intent(this, ConfigureModeActivity.class);
                 startActivity(configIntent);
                 return true;
-        }
+            }
         return super.onOptionsItemSelected(item);
+    }
+
+    private ColorPicker getColPreferences(int cur_mode) {
+        ColorPicker modeColor;
+        int mode_color;
+        switch (cur_mode){
+            case 0:
+                mode_color = prefs.getInt("StandardModeColorAPP", 0);
+                color = ColorHelp.getColors(mode_color);
+                modeColor = new ColorPicker(this,color[0],color[1],color[2]);
+                return modeColor;
+            case 1:
+                mode_color = prefs.getInt("PSModeColorAPP", 0);
+                color = ColorHelp.getColors(mode_color);
+                modeColor = new ColorPicker(this,color[0],color[1],color[2]);
+                return modeColor;
+            case 3:
+                mode_color = prefs.getInt("CrowdModeColorAPP", 0);
+                color = ColorHelp.getColors(mode_color);
+                modeColor = new ColorPicker(this,color[0],color[1],color[2]);
+                return modeColor;
+            case 5:
+                mode_color = prefs.getInt("SecurityModeColorAPP", 0);
+                color = ColorHelp.getColors(mode_color);
+                modeColor = new ColorPicker(this,color[0],color[1],color[2]);
+                return modeColor;
+
+
+        }
+        return null; //Was not any case :(
+    }
+
+    private void updateColPrefs(int cur_mode, int r, int g, int b) {
+        switch (cur_mode){
+            case 0:
+                prefs.edit().putInt("StandardModeColorAPP", Color.rgb(r, g, b)).apply();
+                g = ColorHelp.scaleGreen(g);
+                b = ColorHelp.scaleBlue(b);
+                prefs.edit().putInt("StandardModeColorTrue",Color.rgb(r,g,b)).apply();
+                Toast.makeText(this,"Updated Standard Mode Color",Toast.LENGTH_SHORT).show();
+                break;
+            case 1:
+                prefs.edit().putInt("PSModeColorAPP", Color.rgb(r, g, b)).apply();
+                g = ColorHelp.scaleGreen(g);
+                b = ColorHelp.scaleBlue(b);
+                prefs.edit().putInt("PSModeColorTrue",Color.rgb(r,g,b)).apply();
+                Toast.makeText(this,"Updated Power Save Mode Color",Toast.LENGTH_SHORT).show();
+                break;
+            case 3:
+                prefs.edit().putInt("CrowdModeColorAPP", Color.rgb(r, g, b)).apply();
+                g = ColorHelp.scaleGreen(g);
+                b = ColorHelp.scaleBlue(b);
+                prefs.edit().putInt("CrowdModeColorTrue",Color.rgb(r,g,b)).apply();
+                Toast.makeText(this,"Crowd Mode Color Updated",Toast.LENGTH_SHORT).show();
+                break;
+            case 5:
+                prefs.edit().putInt("SecurityModeColorAPP", Color.rgb(r, g, b)).apply();
+                g = ColorHelp.scaleGreen(g);
+                b = ColorHelp.scaleBlue(b);
+                prefs.edit().putInt("SecurityModeColorTrue",Color.rgb(r,g,b)).apply();
+                Toast.makeText(this,"Security Mode Color Updated",Toast.LENGTH_SHORT).show();
+                break;
+
+        }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
+
+
         if (!mBluetoothAdapter.isEnabled() ){
             Intent enableBluetooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBluetooth, REQUEST_BLUETOOTH);
-        }/*else if (mChatService==null){
-            setupChat();
         }
-        */
+
 
     }
 
@@ -237,6 +315,9 @@ public class MainScreenActivity extends AppCompatActivity{
                 if (resultCode == AppCompatActivity.RESULT_OK){
                     //BT Enabled
                     Toast.makeText(this, "Bluetooth Enabled", Toast.LENGTH_SHORT).show();
+                    //create new intent for listing devices
+                    Intent serverIntent = new Intent(this, DeviceListActivity.class);
+                    startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_SECURE);
                     setupChat();
                 }
                 else {
@@ -280,8 +361,10 @@ public class MainScreenActivity extends AppCompatActivity{
         standardPathwayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String message = prefs.getString("StandardModePref", getString(R.string.def_pathway_mode_cmnd));
-                sendMessage(message);
+
+                    String message = prefs.getString("StandardModePref", getString(R.string.def_pathway_mode_cmnd));
+                    sendMessage(message);
+                    cur_mode = 0;
             }
         });
 
@@ -290,6 +373,8 @@ public class MainScreenActivity extends AppCompatActivity{
             public void onClick(View v) {
                 String message = prefs.getString("PSModePref", getString(R.string.def_ps_pathway_mode_cmd));
                 sendMessage(message);
+                cur_mode=1;
+
             }
         });
 
@@ -298,6 +383,7 @@ public class MainScreenActivity extends AppCompatActivity{
             public void onClick(View v) {
                 String message = prefs.getString("PartyModePref",getString(R.string.def_party_mode_cmd));
                 sendMessage(message);
+                cur_mode=2;
             }
         });
 
@@ -306,6 +392,7 @@ public class MainScreenActivity extends AppCompatActivity{
             public void onClick(View v) {
                 String message = prefs.getString("CrowdModePref",getString(R.string.def_crowd_mode_cmd));
                 sendMessage(message);
+                cur_mode=3;
             }
         });
 
@@ -314,6 +401,7 @@ public class MainScreenActivity extends AppCompatActivity{
             public void onClick(View v) {
                 String message = prefs.getString("SleepModePref",getString(R.string.def_sleep_mode_cmd));
                 sendMessage(message);
+                cur_mode=4;
             }
         });
 
@@ -321,6 +409,8 @@ public class MainScreenActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 String message = prefs.getString("SecurityModePref",getString(R.string.def_security_mode_cmd));
+                sendMessage(message);
+               cur_mode=5;
             }
         });
 
@@ -354,22 +444,6 @@ public class MainScreenActivity extends AppCompatActivity{
         }
     }
 
-    /* Not needed anymore
-
-
-    private TextView.OnEditorActionListener writeListener = new TextView.OnEditorActionListener() {
-        @Override
-        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-            //If the action is a key-up event on the return key, send message
-            if (actionId == EditorInfo.IME_NULL && event.getAction() == KeyEvent.ACTION_UP){
-                String message = outEditText.getText().toString();
-                sendMessage(message);
-            }
-            return true;
-        }
-    };
-
-    */
 
 
     /**
@@ -433,12 +507,14 @@ public class MainScreenActivity extends AppCompatActivity{
                     byte[] writeBuf = (byte[]) msg.obj;
                     // construct a string from the buffer
                     String writeMessage = new String(writeBuf);
+                    Log.d(TAG1, writeMessage);
                     //messageArrayAdapter.add("ME: " + writeMessage);
                     break;
                 case Constants.MESSAGE_READ:
                     byte[] readBuf = (byte[]) msg.obj;
                     //Construct a string from the valid bytes in the buffer
                     String readMessage = new String(readBuf, 0, msg.arg1);
+                    Log.d(TAG1,mConnectedDeviceName +": "+ readMessage);
                     //messageArrayAdapter.add(mConnectedDeviceName + ": "+ readMessage);
                     break;
                 case Constants.MESSAGE_DEVICE_NAME:

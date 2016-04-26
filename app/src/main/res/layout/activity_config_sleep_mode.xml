@@ -21,15 +21,15 @@
         android:layout_height="wrap_content"
         android:text="@string/update"
         android:id="@+id/Sleep_Button_update"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/stnd_space"
-        android:layout_toStartOf="@+id/stnd_space"
-        android:layout_marginBottom="20dp"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:layout_alignLeft="@+id/editText_sleep_end_time"
+        android:layout_alignStart="@+id/editText_sleep_end_time"
+        android:layout_marginBottom="60dp" />
     <Space
         android:layout_width="20dp"
         android:layout_height="10dp"
-        android:id="@+id/stnd_space"
+        android:id="@+id/sleep_space"
         android:layout_centerInParent="true" />
 
     <Button
@@ -37,10 +37,10 @@
         android:layout_height="wrap_content"
         android:text="@string/cancel"
         android:id="@+id/Sleep_Button_cancel"
-        android:layout_alignBottom="@+id/Sleep_Button_update"
-        android:layout_toRightOf="@+id/stnd_space"
-        android:layout_toEndOf="@+id/stnd_space"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_below="@+id/textView"
+        android:layout_toLeftOf="@+id/switch_sleep"
+        android:layout_toStartOf="@+id/switch_sleep" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -59,9 +59,44 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/time_prompt"
         android:id="@+id/textView"
-        android:layout_below="@+id/stnd_space"
-        android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_above="@+id/Sleep_Button_update"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="49dp" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AM/PM"
+        android:id="@+id/switch_sleep"
+        android:layout_alignTop="@+id/editText_sleep_end_time"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/default_prompt"
+        android:textSize="40sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:id="@+id/textView_sleep_default"
+        android:layout_above="@+id/sleep_space"
+        android:layout_toLeftOf="@+id/sleep_space"
+        android:layout_toStartOf="@+id/sleep_space"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_sleep_modes"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/textView_sleep_default"
+        android:layout_toRightOf="@+id/sleep_space"
+        android:layout_toEndOf="@+id/sleep_space" />
 
 </RelativeLayout>

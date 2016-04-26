@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/light_color"
+        android:id="@+id/textView_security_lightcolor"
+       android:layout_marginTop="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="40sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/end_time"
+        android:id="@+id/textView_sec_end_time"
+        android:layout_below="@+id/textView_security_lightcolor"
+        android:layout_alignRight="@+id/textView_security_lightcolor"
+        android:layout_alignEnd="@+id/textView_security_lightcolor"
+        android:layout_marginTop="88dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="40sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/security_color_view"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/textView_security_lightcolor"
+        android:layout_alignBottom="@+id/textView_security_lightcolor"
+        android:layout_toEndOf="@+id/textView_security_lightcolor"
+        android:layout_toRightOf="@+id/textView_security_lightcolor"
+        android:background="@color/colorAccent"/>
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AM/PM"
+        android:id="@+id/switch_sec_switch"
+        android:layout_alignBottom="@+id/textView_sec_end_time"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/colorPrimaryDark"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="5"
+        android:id="@+id/editText_sec_end_time"
+        android:layout_alignBottom="@+id/textView_sec_end_time"
+        android:layout_toLeftOf="@+id/switch_sec_switch"
+        android:layout_toStartOf="@+id/switch_sec_switch"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/update"
+        android:id="@+id/button_sec_update"
+        android:layout_marginBottom="84dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="48dp"
+        android:layout_marginStart="48dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:id="@+id/button_sec_cancel"
+        android:layout_alignTop="@+id/button_sec_update"
+        android:layout_alignRight="@+id/switch_sec_switch"
+        android:layout_alignEnd="@+id/switch_sec_switch"
+        android:layout_marginRight="46dp"
+        android:layout_marginEnd="46dp" />
+
+
+</RelativeLayout>

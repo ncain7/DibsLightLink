@@ -12,12 +12,12 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/colorset"
         android:id="@+id/textView_color_set"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="50dp"
         android:textSize="40sp"
-        android:textColor="@color/colorPrimaryDark" />
+        android:layout_marginTop="30dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,12 +25,11 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/pattern"
         android:id="@+id/textView_pattern"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="50dp"
+        android:layout_below="@+id/textView_color_set"
         android:textSize="40sp"
-        android:layout_below="@id/textView_color_set"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:layout_marginTop="30dp"
+        android:textColor="@color/colorPrimaryDark"
+         />
 
     <TextView
         android:layout_width="wrap_content"
@@ -38,12 +37,13 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/timer"
         android:id="@+id/textView_timer"
-        android:layout_below="@id/textView_pattern"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="50dp"
         android:textSize="40sp"
-        android:textColor="@color/colorPrimaryDark" />
+        android:layout_marginTop="30dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_below="@+id/textView_pattern"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+         />
 
     <TextView
         android:layout_width="wrap_content"
@@ -51,12 +51,13 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/end_time"
         android:id="@+id/textView_end_time"
-        android:layout_below="@id/textView_timer"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:textSize="40sp"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_below="@+id/textView_timer"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -64,31 +65,32 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/default_prompt"
         android:id="@+id/textView20"
-        android:layout_below="@id/textView_end_time"
-        android:layout_marginTop="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
+        android:layout_marginTop="30dp"
         android:textSize="40sp"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_below="@+id/textView_end_time"
+        android:layout_alignRight="@+id/textView_pattern"
+        android:layout_alignEnd="@+id/textView_pattern" />
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/spinner_colorset"
         android:gravity="center"
-        android:layout_alignTop="@id/textView_color_set"
-        android:layout_above="@id/textView_pattern"
-        android:layout_alignStart="@+id/editText"
-        android:layout_alignLeft="@+id/editText"/>
+        android:layout_alignBottom="@+id/textView_color_set"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/textView_color_set"
+        android:layout_toEndOf="@+id/textView_color_set"
+        android:layout_alignTop="@+id/textView_color_set" />
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/spinner_pattern"
-        android:layout_below="@id/spinner_colorset"
         android:layout_alignLeft="@id/spinner_colorset"
         android:layout_alignStart="@id/spinner_colorset"
-        android:layout_alignTop="@id/textView_pattern"/>
+        android:layout_alignTop="@+id/textView_pattern" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -100,7 +102,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:gravity="center"
-        android:hint="12:00am"
+        android:hint="(Seconds)"
         android:textColor="@color/colorPrimaryDark" />
 
     <EditText
@@ -109,43 +111,44 @@
         android:inputType="time"
         android:ems="8"
         android:id="@+id/editText_end_time"
-        android:layout_alignTop="@id/textView_end_time"
-        android:layout_alignStart="@id/editText"
-        android:layout_alignLeft="@id/editText"
         android:gravity="center"
         android:hint="1:00pm"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_alignBottom="@+id/textView_end_time"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner_modes"
-        android:layout_alignTop="@id/textView20"
-        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/textView20"
         android:layout_alignParentRight="true"
-        android:layout_alignBottom="@id/textView20"
-        android:layout_alignStart="@id/editText_end_time"
-        android:layout_alignLeft="@id/editText_end_time" />
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/textView_end_time"
+        android:layout_toEndOf="@+id/textView_end_time" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/update"
-        android:id="@+id/button3"
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@id/textView_color_set"
-        android:layout_alignRight="@id/textView_color_set"
-        android:textColor="@color/colorPrimaryDark" />
+        android:id="@+id/button_party_update"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_below="@+id/textView20"
+        android:layout_toLeftOf="@+id/spinner_pattern"
+        android:layout_toStartOf="@+id/spinner_pattern"
+        android:layout_marginTop="66dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cancel"
-        android:id="@+id/button4"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@id/spinner_modes"
-        android:layout_alignLeft="@id/spinner_modes"
-        android:textColor="@color/colorPrimaryDark" />
+        android:id="@+id/button_party_cancel"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_alignBaseline="@+id/button_party_update"
+        android:layout_alignBottom="@+id/button_party_update"
+        android:layout_alignLeft="@+id/editText_end_time"
+        android:layout_alignStart="@+id/editText_end_time" />
 
 
 </RelativeLayout>

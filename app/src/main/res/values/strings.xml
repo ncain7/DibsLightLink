@@ -37,29 +37,27 @@
     <string name="colorset">Color Set</string>
     <string name="pattern">Pattern</string>
     <string name="time_in_minutes">Enter time in minutes</string>
-    <string name="time_prompt">If no time is specified, the mode will be active until manually changed by the user</string>
+    <string name="time_prompt">If no time is specified, when switched to this mode, it
+        will remain active until manually changed by the user</string>
     <string name="crowd_light_speed">Light Speed</string>
 
     <!-- Spinner arrays -->
     <string-array name="colorset_array">
         <item>Cold</item>
         <item>Warm</item>
-        <item>Custom</item>
     </string-array>
 
     <string-array name="modes_array">
         <item>Standard Pathway Mode</item>
         <item>Power Save Pathway Mode</item>
         <item>Party Mode</item>
-        <item>Day Time Security Mode</item>
-        <item>Night Time Security Mode</item>
+        <item>Security Mode</item>
         <item>Sleep Mode</item>
     </string-array>
 
     <string-array name="patterns_array">
-        <item>Fading</item>
-        <item>Moving</item>
-        <item>Flashing</item>
+        <item>Blink</item>
+        <item>Alternate</item>
         <item>Random</item>
     </string-array>
 

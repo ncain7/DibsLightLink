@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -14,6 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import java.lang.Math;
 
 /**
  * Created by NickHome on 3/19/16.
@@ -26,7 +28,8 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
     TextView redColorHint, greenColorHint, blueColorHint;
     EditText hexColor;
 
-    private int red, green, blue;
+    private String TAG = "ColorPicker";
+    private int red, green, blue, trueRed, trueGreen, trueBlue;
     int seekBarLeft;
     Rect thumbRect;
 
@@ -126,12 +129,22 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
     }
 
     private void updateColorView(String s) {
+        Log.d(TAG, "updateColorView: BEGINNING FUNCTION");
 
         if (s.matches("-?[0-9a-fA-F]+")){
             int color = (int) Long.parseLong(s, 16);
             red = (color >> 16) & 0xFF;
             green = (color >> 8) & 0xFF;
             blue = (color >> 0) & 0xFF;
+            trueRed = red;
+            trueGreen =(int)(2.3286 * Math.exp((green+0.1)*0.0187));
+            trueBlue = (int)(0.0055*Math.pow(blue,2)-0.6191*blue+1.6136);
+            Log.d(TAG, "TRUEGREEN: "+trueGreen+" TRUEBLUE: "+trueBlue);
+            if (trueBlue<0)
+                trueBlue = 0;
+            if (trueGreen<0)
+                trueGreen = 0;
+            //colorView.setBackgroundColor(Color.rgb(red, trueGreen, trueBlue));
             colorView.setBackgroundColor(Color.rgb(red, green, blue));
             redSeekBar.setProgress(red);
             greenSeekBar.setProgress(green);
@@ -194,6 +207,12 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
         }
         else if (seekBar.getId() == R.id.greenSeekBar){
             green = progress;
+            if (green == 0)
+                trueGreen = 0;
+            else
+                trueGreen =(int)(2.3286 * Math.exp((green+0.1)*0.0187));
+            if (trueGreen<1)
+                trueGreen=0;
             thumbRect = greenSeekBar.getThumb().getBounds();
             greenColorHint.setX(seekBarLeft + thumbRect.left);
 
@@ -207,6 +226,9 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
 
         else if (seekBar.getId() == R.id.blueSeekBar){
             blue = progress;
+            trueBlue = (int)(0.0055*Math.pow(blue,2)-0.6191*blue+1.6136);
+            if (trueBlue < 1 || blue == 0)
+                trueBlue = 0;
             thumbRect = blueSeekBar.getThumb().getBounds();
             blueColorHint.setX(seekBarLeft + thumbRect.left);
 
@@ -246,7 +268,21 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
         return blue;
     }
 
+    public int getTrueRed(){
+        return trueRed;
+    }
+
+    public int getTrueGreen(){
+        return trueGreen;
+    }
+
+    public int getTrueBlue(){
+        return trueBlue;
+    }
+
     public int getColor(){
         return Color.rgb(red,green,blue);
     }
+
+
 }

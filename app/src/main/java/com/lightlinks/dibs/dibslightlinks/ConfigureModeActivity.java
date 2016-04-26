@@ -3,9 +3,9 @@ package com.lightlinks.dibs.dibslightlinks;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -17,8 +17,7 @@ import android.widget.Toast;
  * Created by NickHome on 4/15/16.
  */
 public class ConfigureModeActivity extends AppCompatActivity{
-
-
+    private static final String MYAPPPREFS = "DibsPrefs";
     private int LEDred, LEDgreen, LEDblue;
     ColorPicker cp; // = new ColorPicker(this,0,0,0);
     SharedPreferences pref;// = PreferenceManager.getDefaultSharedPreferences(this);
@@ -32,8 +31,8 @@ public class ConfigureModeActivity extends AppCompatActivity{
         //Setup toolbar
         Toolbar myToolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(myToolbar);
-        cp = new ColorPicker(this,0,0,0);
-        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        //cp = new ColorPicker(this,0,0,0);
+        pref = getSharedPreferences(MYAPPPREFS,0);
         mActivity = this;
 
         //Setup buttons and their listeners
@@ -93,6 +92,8 @@ public class ConfigureModeActivity extends AppCompatActivity{
     }
 
     private void configureSecurityMode() {
+        Intent config_sec_intent = new Intent(this, ConfigSecurityActivity.class);
+        startActivity(config_sec_intent);
     }
 
     private void configureSleepMode() {
@@ -122,20 +123,33 @@ public class ConfigureModeActivity extends AppCompatActivity{
         //startActivity(stnd_mode_config);
         Toast.makeText(this,"You can only change color in Standard Mode",Toast.LENGTH_SHORT).show();
 
+        int RGBcolor = pref.getInt("StandardModeColorAPP",0);
+        if (RGBcolor == 0){
+            cp = new ColorPicker(this, 0,0,0);
+        }else{
+            int []colors = ColorHelp.getColors(RGBcolor);
+            cp = new ColorPicker(this,colors[0],colors[1],colors[2]);
+        }
         cp.show();
         Button updateButton = (Button) cp.findViewById(R.id.button_update_color);
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 LEDred = cp.getRed();
-                LEDgreen = cp.getGreen();
-                LEDblue = cp.getBlue();
-                String command = "LED "+LEDred+" "+LEDgreen+" "+LEDblue+" 5|PIR OFF|TIRS OFF|PAT ON|";
-                pref.edit().putString("StandardModePref",command).apply();
+                LEDgreen = cp.getTrueGreen();
+                LEDblue = cp.getTrueBlue();
+                //String command = "LED " + LEDred + " " + LEDgreen + " " + LEDblue + " 5|PIR OFF|TIRS OFF|PAT ON|";
+                String command = "0 LED "+LEDred+" "+LEDgreen+" "+LEDblue+" 5|";
+                pref.edit().putString("StandardModePref", command).apply();
+                pref.edit().putInt("StandardModeColorAPP", cp.getColor()).apply();
+                pref.edit().putInt("StandardModeColorTrue", Color.rgb(LEDred,LEDgreen,LEDblue)).apply();
                 cp.dismiss();
-                Toast.makeText(mActivity,command,Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity, "Color updated for Standard mode", Toast.LENGTH_SHORT).show();
             }
         });
         
     }
+
+
 }

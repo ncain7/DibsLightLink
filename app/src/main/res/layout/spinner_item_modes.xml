@@ -4,6 +4,7 @@
     android:id="@android:id/text2"
     android:textSize="20sp"
     android:textColor="@color/colorPrimaryDark"
+    android:textStyle="normal"
     android:gravity="center">
 
 </TextView>

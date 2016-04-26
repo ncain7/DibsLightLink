@@ -39,7 +39,7 @@ public class ModeClass extends Application{
 
     //}
 
-    private void setMode(int mode){
+    public void setMode(int mode){
         cur_mode = mode;
     }
 
